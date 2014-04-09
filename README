@@ -1,0 +1,53 @@
+************************************************
+	Full Name: Akshay Sanjay Kale
+	Student ID: 1097-4460-89
+	Session: 4
+************************************************
+
+Assignment Description:
+	In this assignment, I have simulated a resource-discovery/file-sharing network using a hybrid architecture with UDP and TCP sockets.
+This assignment is divided into 3 major phases:
+Phase 1: In this phase I have created a directory server which will handle registration requests of three file servers. Along with the directory server I am creating three file servers using fork() system call. The file servers will send their ID and their TCP port to the directory server in a message over a UDP connection. The directory server will receive them and append it to a file called directory.txt.    	
+
+Phase 2: In this phase I am creating two client processes using fork() system call. The clients will ask for the file resources to the directory server by sending a message over a UDP connection. The directory server on the receipt of the message will check for the nearest file server containing the resource using the files topology.txt and resource.txt. The directory server will now send the TCP port number of the nearest file server to the requesting clients over a UDP connection.
+
+Phase 3: In this phase, I am opening file servers' TCP connection to receive TCP connection requests from the clients. Once the clients processes receive their file servers' TCP port numbers, they will dynamically send a TCP connection request to the file servers to ask for the files. The file servers upon the receipt of the request from clients respond by sending the file back to the clients.
+
+
+Source Code Files:
+1. Header Files:
+	1.a	common.h: This file includes all library files necessary for network programming and defines the global macros. This file is commonly included in all rest of the header files.
+ 
+	1.b	client.h: Includes the library files from common.h and the function declarations for the file client.c
+	1.c	directory_server.h: Includes the library files from common.h, structure definitions and declarations for the functions in directory_server.c
+	1.d	file_server.h: Includes the library files from common.h and declarations for the functions in file_server.c
+
+2. C Files
+	2.a	client.c: This file includes the code which will simulate the functionalities of the two clients. 
+	2.b	directory_server.c: This file includes all the functionalities of the directory server.
+	2.c	file_server.c: This file includes all the functionalities of the file servers.
+
+3. Text Files
+	3.a	resource.txt:  
+	3.b	topology.txt:
+
+4. Makefile
+
+5. README	 
+
+
+Compilation instructions:
+1. make: To compile the source code. Three executables get created namely directory_server, file_server and client.
+2. make clean: To clean up all executables.
+
+
+Format of onscreen messages:
+	"Phase number: Message"	as per the specification
+
+
+Note to the grader:
+	In this assignment, file servers keep listening over TCP connection for incoming client requests. Thus in order to terminate the program, I am killing these file server processes using kill() system call. Therefore the grader will not have to explicitely kill these file server processes.
+
+
+Regarding code reusage:
+	I have not reused any sort of code from any source.
